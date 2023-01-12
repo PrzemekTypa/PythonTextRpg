@@ -53,3 +53,47 @@ Gra może być także rozwijana poprzez dodanie grafiki i dźwięku, aby zwięks
 Aby uruchomić grę, wymagany jest komputer z systemem operacyjnym Windows, macOS lub Linux oraz interpreter języka Python.
 Gra jest przeznaczona do użytku z konsolą, więc nie wymaga specjalnego sprzętu graficznego ani dźwiękowego.
 Gra powinna działać na większości komputerów osobistych bez konieczności dokonywania dodatkowych ustawień.
+
+13. Getting started:
+Typ plikuPython Script
+ Czym są pliki PY?
+Plik PY jest plikiem programu lub skryptem napisanym w języku Python, zinterpretowanym językiem programowania obiektowego. Można go tworzyć i edytować za pomocą edytora tekstowego, ale do uruchomienia potrzebny jest interpreter języka Python. Pliki PY są często używane do programowania serwerów internetowych i innych administracyjnych systemów komputerowych.
+
+Python został zaprojektowany tak, aby był łatwy do odczytania i prosty w implementacji. Jest to oprogramowanie typu open source i służy do opracowywania szerokiej gamy bezpłatnych i komercyjnych aplikacji, takich jak Bazaar, Blender, Pylons i Panda3D.
+
+UWAGA: Język programowania został pierwotnie stworzony pod koniec lat 80. przez Guido van Rossum z kolejnymi wersjami wydanymi w 2000 (Python 2.0) i 2008 (Python 3.0).
+
+Programy, które otwierają pliki PY
+Windows	
+      GNU Emacs
+      Microsoft Notepad
+      ES-Computing EditPlus
+      Richardson EditRocket
+      Notepad++
+      Eclipse
+      Sublime Text
+      Python Software Foundation Python
+      ActiveState Komodo Edit
+      IDM UltraEdit
+      Scribus
+Linux	
+      GNU Emacs
+      Richardson EditRocket
+      gedit
+      Eclipse
+      Sublime Text
+      Python Software Foundation Python
+      ActiveState Komodo Edit
+      IDM UltraEdit
+      Scribus
+Macintosh	
+      MacroMates TextMate
+      MacVim
+      GNU Emacs
+      Richardson EditRocket
+      Eclipse
+      Sublime Text
+      Python Software Foundation Python
+      ActiveState Komodo Edit
+      IDM UltraEdit
+      Scribus
