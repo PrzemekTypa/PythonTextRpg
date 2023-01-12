@@ -48,3 +48,8 @@ Gra może być rozwijana poprzez dodanie nowych pokojów, przedmiotów i bossów
 Gra może być również rozwijana poprzez dodanie nowych funkcjonalności, takich jak system ekwipunku, rozwijanie postaci gracza 
 poprzez dodanie punktów życia/many/czarów oraz zaimplementowanie walki łącznie z (import random).
 Gra może być także rozwijana poprzez dodanie grafiki i dźwięku, aby zwiększyć immersję gracza.
+
+12. Wymagania systemowe:
+Aby uruchomić grę, wymagany jest komputer z systemem operacyjnym Windows, macOS lub Linux oraz interpreter języka Python.
+Gra jest przeznaczona do użytku z konsolą, więc nie wymaga specjalnego sprzętu graficznego ani dźwiękowego.
+Gra powinna działać na większości komputerów osobistych bez konieczności dokonywania dodatkowych ustawień.
