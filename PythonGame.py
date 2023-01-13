@@ -2,10 +2,14 @@ import os
 import time
 import sys
 
+# Variable for riddles
+riddle_solved = False
+
 # Variables for time module
 a = 0.1
-b = 0.5
+b = 4
 c = 1
+d = 10
 
 #Display starting menu
 def prompt():
@@ -25,17 +29,17 @@ def clear():
 
 # map
 rooms = {
-    'Main hall': {'North': 'Library', 'West': 'Riddle1 room', 'East': 'Dead end room'},
+    'Main hall': {'North': 'Library', 'West': 'Round room', 'East': 'Dead end room'},
     'Library': {'North': 'UndeadWarrior room', 'South': 'Main hall'},
-    'Riddle1 room': {'East': 'Main hall', 'Item': 'Sword'},
+    'Round room': {'East': 'Main hall', 'Item': 'Sword'},
     'Dead end room': {'West': 'Main hall'},
-    'UndeadWarrior room': {'West': 'Riddle2 room', 'Boss': 'Undead Warrior'},
-    'Riddle2 room': {'North': 'Troll room', 'West': 'Storage room',},
-    'Storage room': {'East': 'Riddle2 room', 'Item': 'Shield'},
+    'UndeadWarrior room': {'West': 'Corridor', 'Boss': 'Undead Warrior'},
+    'Corridor': {'North': 'Troll room', 'West': 'Storage room',},
+    'Storage room': {'East': 'Corridor', 'Item': 'Shield'},
     'Troll room': {'North': 'Dining room', 'Boss2': 'Troll', 'Item': 'Helmet'},
     'Dining room': {'North': 'Dragons lair', 'East': 'Bedroom', 'Item': 'Potion'},
     'Bedroom': {'West': 'Dining room', 'Item': 'Armor', 'Boss3': 'Weird looking Ogre'},
-    'Dragons lair': {'South': 'Dining room', 'Boss4': 'Dragon'}
+    'Dragons lair': {'Boss4': 'Dragon'}
     }
 
 #Inventory list
@@ -65,28 +69,48 @@ while True:
     elif current_room == "Library":
         print(f"You are in the {current_room}.\nStrange noises can be heard\noutside the north door.You can\nopen the door and check where \nthe noise is coming from\nor go back and look around.\n What do you do?: (North/South)\nInventory : {inventory}\n{'-' * 25}")
         if len(inventory) < 1:
-            print("You dont feel prepared.")
+            print("\nYou dont feel prepared.\n")
         elif len(inventory) == 1:
-            print("With the sword in your hand you feel comfortable to check whats in the next room.")
+            print("\nWith the sword in your hand you feel comfortable to check whats in the next room.\n")
     
-    elif current_room == "Riddle1 room":
-        print(f"You are in the {current_room}.\nAn old man sitting in the corner of the room greets you.\n'If you guess the riddle I'll let you take the prize,\nBUT if you don't know the answer\nI'll turn you into a donkey.'\nInventory : {inventory}\n{'-' * 25}")
-    # only one answer is correct, if your answer is wrong you get turned to donkey(Game over).
-    # if you answer correctly you can pick the sword and after that youre automatically kicked out the room with no possibility to go back.     
-    # (like the room don't exist anymore/or you get message after trying get in ('go west' from main hall) thats doors locked.)
+        
+    elif current_room == "Round room" and not riddle_solved:
+        print(f"You are in the {current_room}.\nAn old man sitting in the corner of the room greets you.\n\nInventory : {inventory}\n{'-' * 25}")
+        dialogue = "'If you guess the riddle I'll let you take the prize,\nBUT if you don't know the answer\nI'll turn you into a donkey.\nWhat goes on four legs in the morning, two legs in the afternoon, and three legs in the evening?\n'"
+        for character in dialogue:
+                sys.stdout.write(character)
+                sys.stdout.flush()
+                time.sleep(a)
+                
+        
+        answer = input("What is your answer?: ")
+        if answer == "man" or "Man":
+            dialogue = "'\nCorrect, you can take your reward and leave.\n(get sword/go east)\n'"
+            for character in dialogue:
+                sys.stdout.write(character)
+                sys.stdout.flush()
+                time.sleep(a)
+            riddle_solved = True
+            
+        else:
+            print("Too bad, You'll be a donkey for the rest of your life.\n\nGAME OVER.\n")
+            time.sleep(d)
+            break
+
+    
     
     elif current_room == "Dead end room":
         print(f"You are in the {current_room}.\nThere is a lever in the middle of the room.\nWhat do you want to do?\n(go west/pull)\nInventory : {inventory}\n{'-' * 25}")
         if user_input.casefold() == "pull":
-            print("The moment you pull the lever, a trap door opens below you.\nYou fall straight onto the spikes. You're Dead.")
+            print("The moment you pull the lever, a trap door opens below you.\nYou fall straight onto the spikes.\nYou're Dead.")
+            time.sleep(d)
             break
         elif user_input.casefold() == "go west":
             action == "go west"
         
-    elif current_room == "Riddle2 room":
-        print(f"You are in the {current_room}.\nA cat comes up to you and, to your surprise, starts speaking 'If you solve my riddle ill let you pass'\nInventory : {inventory}\n{'-' * 25}")
-    # after answering the right question youre able to travel either west to 'storage room' or north 'troll'room.  
-    # the riddle wont repeat after you come back here from 'storage room'. Riddle is a loop untill your answer is correct.
+    elif current_room == "Corridor":
+        print(f"You are in the long {current_room}.\nThere is a small Storage room in the west and some big door leading north. (west/north) \nInventory : {inventory}\n{'-' * 25}")
+        
     
     elif current_room == "Storage room":
         print(f"You are in the {current_room}.\nBetween the brooms and the pile of lumber, you see a shiny shield.\nWhat do you do? (go east/get Shield)\nInventory : {inventory}\n{'-' * 25}")
@@ -118,11 +142,12 @@ while True:
         if len(inventory) < 1:
             print(f"You are in the {current_room}. \nInventory : {inventory}\n{'-' * 25}")
             print(f"Without any equipment, you had no chance of defeating {rooms[current_room]['Boss']}.\nYou're dead.")
+            time.sleep(d)
             break
         #Win
         else:
             print(f"You are in the {current_room}. \nInventory : {inventory}\n{'-' * 25}")
-            print(f"With a sword in your hand, you easily defeated the {rooms[current_room]['Boss']}!\nThe only way available is the west.")
+            print(f"Having a sword, you easily defeated the {rooms[current_room]['Boss']}!\nThe only way available is the west.")
             
     elif 'Boss2' in rooms[current_room].keys():
         
@@ -130,6 +155,7 @@ while True:
         if len(inventory) < 2:
             print(f"You are in the {current_room}. \nInventory : {inventory}\n{'-' * 25}")
             print(f"With the sword alone you failed to attack and defend at the same time from {rooms[current_room]['Boss2']} massive club.\nYou're dead.")
+            time.sleep(d)
             break
         #Win
         else:
@@ -142,6 +168,7 @@ while True:
         if len(inventory) < 4:
             print(f"You are in the {current_room}. \nInventory : {inventory}\n{'-' * 25}")
             print(f"You see {rooms[current_room]['Boss3']} sleeping in the bed.\nYou try to sneak in silently but the Ogre suddenly wakes up and smack you on the head.\nHe then quickly apologizes, however the lack of helmet or potion make this wound fatal.\nYou're dead. ")
+            time.sleep(d)
             break
         #Win
         else:
@@ -162,12 +189,13 @@ while True:
 
             print()
             print(f"then a huge {rooms[current_room]['Boss4']} emerges from behind a pillar. Without being fully armed, the {rooms[current_room]['Boss4']} quickly turns you into a living torch.\n You're dead.")
+            time.sleep(d)
             break
         #Win
         else:
             print(f"You are in the {current_room}. \nInventory : {inventory}\n{'-' * 25}")
             time.sleep(c)
-            print(f"After a fierce battle, you manage to land the final blow on {rooms[current_room]['Boss4']}\nyou ask the beast:\n")
+            print(f"After a fierce battle, you manage to land the final blow on {rooms[current_room]['Boss4']},\nyou ask the beast:\n")
             time.sleep(c)
             dialogue = '"Where is the princess?!"'
             for character in dialogue:
@@ -187,14 +215,14 @@ while True:
             print()
             time.sleep(c)
             
-            print("\nSuddenly it dawned on you, the king mentioned something\nabout the princess's strange behavior during the night.")
-            time.sleep(3)
-            print("The monster in the bedroom you slew wasn't an Ogre.")
-            time.sleep(3)
+            print("\nSuddenly it dawned on you, the king mentioned something\nabout the princess's strange behavior during the night.\n")
+            time.sleep(b)
+            print("The monster in the bedroom you slew wasn't an Ogre.\n")
+            time.sleep(b)
             print("Realizing this, you decide to leave the castle and never show up in these lands again.\n\n")
-            time.sleep(3)
+            time.sleep(b)
             print(f"{'-' * 25}THE END{'-' * 25}\n\n")
-            time.sleep(10)
+            time.sleep(d)
             break
 
 
