@@ -6,7 +6,7 @@ import sys
 riddle_solved = False
 
 # Variables for time module
-a = 0.1
+a = 0.05
 b = 4
 c = 1
 d = 10
