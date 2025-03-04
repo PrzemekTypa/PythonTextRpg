@@ -84,7 +84,7 @@ while True:
                 
         
         answer = input("What is your answer?: ")
-        if answer == "man" or "Man":
+        if answer.lower() == "man" or answer.lower() == "human":
             dialogue = "'\nCorrect, you can take your reward and leave.\n(get sword/go east)\n'"
             for character in dialogue:
                 sys.stdout.write(character)
